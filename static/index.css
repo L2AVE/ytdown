@@ -1,0 +1,276 @@
+@font-face {
+    font-family: 'LeferiPoint-BlackObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100%;
+    height: 100%;
+}
+h1{
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    font-weight:normal;
+}
+
+
+/*********************기본세팅**************************/
+
+div {
+    /* border: 1px solid black; */
+}
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    width: 100%;
+    height: 1200px;
+    /* border: 5px solid orange; */
+}
+#top {
+    display: flex;
+    width: 100%;
+    height: 30%;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly;
+    /* border: 10px solid pink; */
+
+}
+
+.webTitle, .urlBox {
+    display: flex; /* h1태그는 block 요소라 수직정렬을 위해 flex 적용 */
+    align-items: center;
+    
+}
+
+.urlBox{
+    
+    
+}
+.urlBox .inputLabel{
+    width: 300px;
+    height: 50px;
+    border: 3px solid black;
+}
+.urlBox .submitBtn{
+    width: 80px;
+    height: 50px;
+    border: 3px solid black;
+    background-color: white;
+    transition: 0.3s;
+
+}
+.urlBox .submitBtn:hover {
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+}
+.webTitle{
+    flex-grow: 2;
+    border-bottom: 1px solid black;
+    
+}
+
+.title-icon{
+    width: 70px;
+    height: 50px;
+}
+.webTitle h1 {
+    margin-bottom: 0px;
+    font-family: 'LeferiPoint-BlackObliqueA';
+    font-size: 48px;
+    /* font-weight: bold; */
+}
+.urlBox {
+    flex-grow: 1;
+}
+#mainBoard{
+   	display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 60%;
+    /* border: 1px solid black; */
+}
+.thumbnailBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 60%;
+    
+    border: 1px solid black;
+}
+.thumbnail {
+    width: 400px;
+    height: 300px;
+    /* border: 3px solid blue; */
+}
+ a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid black; */
+    background-repeat: no-repeat;
+   
+} 
+a img {
+    
+    width: 100%;
+    height: 100%;
+    
+}
+.columnBox{
+    margin-left: 10px;
+}
+.infoBox{
+    display: flex;
+    flex-direction: column; 
+    align-items: baseline; /* 글자 박스를 압축 */
+    justify-content: center; 
+    width: 100%;
+    height: 30%;
+    padding-left: 10px;
+    border: 1px solid black;
+}
+
+.font{
+    
+    font-size: 16px;
+}
+.author .font{
+    font-size: 18px;
+}
+.name .font{
+    font-weight: bold;
+    font-size: 27px;
+}
+.columnBox{
+    display: flex;
+    flex-direction: column;
+}
+ 
+.buttonBox{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 10%;
+}
+
+
+.down.box{
+}
+.box{
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 50px;
+}
+.select.box {
+    display: flex;
+
+
+}
+.qualityBtn{
+    justify-content: center;
+    text-align: center;
+    width: 200px;
+    height: 100%;
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+
+}
+.qualityBtn:hover{
+    background-color: rgb(53, 53, 53);
+    color: white;
+    transition: 0.2s
+}
+.qualityBtn:active{
+
+}
+
+.loading{
+    all:unset;
+}
+
+.wrap-loading{
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1200px;
+    background-color: #dedede;
+    opacity: 0.3;
+    
+}
+
+.spinner-border{
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    top:60%;
+    left:50%;
+    opacity: 1;
+}
+
+#downBtn{
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+    
+}
+#downBtn:hover{
+    border: 1px solid rgb(255, 195, 65);
+    background-color: rgb(255, 195, 65);
+    color: black;
+    transition: 0.3s;
+}
+#downBtn:checked ~ .spinner-border{
+}
+
+.check{
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top:60%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    animation: op1 4s;
+}
+
+
+@keyframes op1 {
+    50% {
+        opacity: 1;
+        animation-delay: 1s;
+        visibility: visible;
+    }
+    
+}
+
+@keyframes op2 {
+    50% {
+        opacity: 0.4;
+        animation-delay: 1s;
+        visibility: visible;
+    }
+    
+}

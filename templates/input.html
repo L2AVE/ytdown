@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+{% block content1 %}
+    
+        <div class="thumbnailBox">
+            <div class="video thumbnail">
+                <a href="{{ video_info.url }}" target="_blank">
+                    <img src="{{ video_info.thumbnail }}">
+                </a> 
+            </div> 
+        </div>
+        <div class="columnBox">
+            <div class="infoBox">
+                <div class="name p_box">
+                    <p class="name font">{{ video_info.name }}</p>
+                </div>
+                <div class="author p_box">
+                    <p class="author font">{{ video_info.author }}</p>
+                </div>
+                <div class="length p_box">
+                    <p class="length font">duration: 
+                    {{ video_info.length_min }}:{{ video_info.length_sec }}</p>
+                </div>
+                <div class="view p_box">
+                    <p class="view font">views: {{ video_info.view }}</p>
+                </div>
+            </div>
+            <div class="buttonBox">
+                <div class="select box">
+                <form method="GET" action="/down" name="submitForm">
+                    <select name="quality" class="qualityBtn">   
+                        <!-- q의 video_info 변수이름을 명시하면 에러가 난다,, 이유는 모른다,, 1주일동안 헤맸다..-->     
+                        <optgroup label="MP4 Video">
+                        {% for video_index in video_info.video_result %} 
+                            <option value="{{ video_index }}.mp4">{{ video_index }}</option>
+                        {% endfor %}
+                        </optgroup>
+                        <optgroup label="MP3 Audio">
+                        {% for video_index in video_info.mp3_result %}
+                        <!-- mp3 1번째 옵션에 기본으로 select -->
+                            {% if loop.index == 1 %} 
+                                <option selected value="{{ video_index }}.mp3">{{ video_index }}</option>
+                            {% else %}
+                                <option value="{{ video_index }}.mp3">{{ video_index }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="down box">
+                    <button type="submit" class="btn btn-dark" id="downBtn" onclick="down();">Download</button>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="loading">
+            
+        </div>
+        {% block content2 %}
+        {% endblock %}
+        <!-- {% block content3 %}
+        {% endblock %} -->
+
+
+{% endblock %}

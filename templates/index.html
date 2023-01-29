@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>MAIN PAGE</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body>
+	<div id="container">
+		<div id="top"> 
+			<div class="webTitle">
+				<div class="title-icon">
+					<a href="#">
+						<img src="./static/youtube-icon.jpg" alt="">
+					</a>
+				</div>
+				<h1>YouTube Downloader</h1>
+			</div>
+			<div class="urlBox">
+  				<form method="GET" action="/input" name="urlForm">
+					<input type="text" name="inputUrl" class="inputLabel" placeholder=" enter url here!" >
+					<button type="submit" name="submitBtn" class="submitBtn">SUBMIT</button>
+				</form>
+			</div>
+			
+		</div>
+		<div id="mainBoard">
+			
+			{% block content1 %}
+			
+			{% endblock %}
+			
+
+		</div>
+		
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="{{ url_for('static', filename='index.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
