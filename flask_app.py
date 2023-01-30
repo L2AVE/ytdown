@@ -25,8 +25,8 @@ import requests
 import keyboard
 # import pyautogui
 
-# import matplotlib
-# matplotlib.use('Agg')
+import matplotlib
+matplotlib.use('TkAgg')
 
 app = Flask(__name__)
 #app.config.from_object(__name__)
