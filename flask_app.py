@@ -13,7 +13,7 @@ from moviepy.editor import *
 import moviepy.editor as mp
 # import subprocess
 # import logging
-# import sys
+
 import os
 import requests
 # import getpass
@@ -25,8 +25,14 @@ import requests
 import keyboard
 # import pyautogui
 
-# import matplotlib
-# matplotlib.use('TkAgg')
+import matplotlib
+matplotlib.use('TkAgg')
+
+import sys
+if sys.version_info[0] == 3:
+    import tkinter as tk
+else:
+    import Tkinter as tk
 
 app = Flask(__name__)
 #app.config.from_object(__name__)
