@@ -12,8 +12,8 @@ build:
     RAILS_ENV: development
     FOO: bar
 release:
-  command:
-    - ./deployment-tasks.sh
+  # command:
+  #   - ./deployment-tasks.sh
   image: worker
 run:
   web: bundle exec puma -C config/puma.rb
