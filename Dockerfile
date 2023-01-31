@@ -5,11 +5,11 @@ FROM python:3.7.9
 WORKDIR /src/app
 
 # package-lock까지 가져가자
-COPY package*.json ./
+# COPY package*.json ./
 
-RUN yarn
+# RUN yarn
 
 COPY . .
 
 EXPOSE 5000
-CMD yarn run dev
+# CMD yarn run dev
