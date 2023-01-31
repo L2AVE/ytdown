@@ -25,14 +25,14 @@ import requests
 import keyboard
 # import pyautogui
 
-import matplotlib
-matplotlib.use('TkAgg')
+# import matplotlib
+# matplotlib.use('TkAgg')
 
 import sys
-if sys.version_info[0] == 3:
-    import tkinter as tk
-else:
-    import Tkinter as tk
+# if sys.version_info[0] == 3:
+#     import tkinter as tk
+# else:
+#     import Tkinter as tk
 
 app = Flask(__name__)
 
