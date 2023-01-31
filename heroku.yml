@@ -16,7 +16,7 @@ release:
   #   - ./deployment-tasks.sh
   image: worker
 run:
-  web: bundle exec puma -C config/puma.rb
+  # web: bundle exec puma -C config/puma.rb
   worker: python flask_app.py
   # asset-syncer:
   #   command:
