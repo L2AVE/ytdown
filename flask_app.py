@@ -3,6 +3,7 @@ from pickle import FALSE, NONE
 from flask import *
 from pytube import YouTube
 from moviepy.editor import *
+from io import BytesIO
 # from selenium import webdriver
 # from tkinter import filedialog
 # from tkinter import *
@@ -132,15 +133,21 @@ def mp3_check():
 
 
 
-# @app.route('/down', methods=['GET'])
-# def down():
-# 	# client -> server 데이터 전송은 form 으로 받을 수 있다
-# 	# 선택한 화질
-# 	quality = request.args.get("quality") 
+@app.route('/down', methods=['GET'])
+def down():
+	# client -> server 데이터 전송은 form 으로 받을 수 있다
+	# 선택한 화질
+	quality = request.args.get("quality") 
 
+	buffer = BytesIO() # Declaring the buffer
 
+	video = video.streams.get_by_itag(quality) # Store the video into a variable
+	video.stream_to_buffer(buffer)
+	buffer.seek(0)
+	return send_file(buffer, as_attachment=True, download_name="Video - YT2Video.mp4", mimetype="video/mp4")
+	
 
-# 	# 파일 저장 경로창 정하기 위한 flag 변수
+	# 파일 저장 경로창 정하기 위한 flag 변수
 # 	if "mp3" in quality:
 # 		mp3_flag = 1
 # 	else:
