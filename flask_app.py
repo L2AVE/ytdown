@@ -1,3 +1,7 @@
+#-*- coding:utf-8 -*-
+from urllib import parse
+
+
 #from argparse import Action
 from pickle import FALSE, NONE
 from flask import *
@@ -12,6 +16,7 @@ from flask import redirect, send_file
 # from tqdm import tqdm
 # from requests import ConnectionError
 # from requests import HTTPError
+import settings.py
 import moviepy.editor as mp
 # import subprocess
 # import logging
@@ -27,17 +32,9 @@ import requests
 import keyboard
 # import pyautogui
 
-# import matplotlib
-# matplotlib.use('TkAgg')
-
-import sys
-# if sys.version_info[0] == 3:
-#     import tkinter as tk
-# else:
-#     import Tkinter as tk
 
 app = Flask(__name__)
-
+# app.config['JSON_AS_ASCII'] = False
 
 @app.route("/")
 def index():
@@ -46,7 +43,7 @@ def index():
 
 @app.route("/input", methods=['GET'])
 def input():
-	global video, video_info, video_quality, audio_quality, video_stream, video_itag, audio_itag, youtube_url
+	global video, video_info, video_quality, audio_quality, video_stream, video_itag, audio_itag, youtube_url, mp3_result
 	youtube_url = ''
 	video_itag = []
 	audio_itag = []
@@ -106,7 +103,7 @@ def video_check():
 	
 	for i, v in enumerate(video_quality):
 		# quality 검사 후 첫번째 stream 가져옴
-		temp = video.streams.filter(res=v).first() 
+		temp = video.streams.filter(res=v, progressive=True).first() 
 		video_stream.append(temp)
 		if not temp:
 			# 공백을 붙임
@@ -137,15 +134,34 @@ def mp3_check():
 @app.route('/down', methods=['GET'])
 def down():
 	# client -> server 데이터 전송은 form 으로 받을 수 있다
-	# 선택한 화질
-	quality = request.args.get("quality") 
+	# Declaring the buffer
+	buffer = BytesIO()
+	# 한글이 깨져서 디코딩 해놓는다
+	title = parse.quote(video.title)
 
-	buffer = BytesIO() # Declaring the buffer
+	quality = request.args.get("quality")
+	if 'mp3' in quality:
+		quality = quality.replace('.mp3', '')
+		vs = video.streams.filter(abr=quality).first()
+		vs.stream_to_buffer(buffer)
+		buffer.seek(0)
+	
+		return send_file(buffer, as_attachment=True, download_name="[YTDWLD]-"+title+".mp3", mimetype="video/mp3")
 
-	video = video.streams.get_by_itag(quality) # Store the video into a variable
-	video.stream_to_buffer(buffer)
-	buffer.seek(0)
-	return send_file(buffer, as_attachment=True, download_name="Video - YT2Video.mp4", mimetype="video/mp4")
+	else:
+		quality = quality.replace('.mp4', '')
+		vs = video.streams.filter(res=quality, progressive=True).first()		
+		
+		vs.stream_to_buffer(buffer)
+		buffer.seek(0)
+
+		
+		return send_file(buffer, as_attachment=True, download_name="[YTDWLD]-"+title+".mp4", mimetype="video/mp4")
+		
+
+	# return redirect(url_for('input'))
+	# vs = video.streams.get_by_itag(quality) # Store the video into a variable
+	
 	
 
 	# 파일 저장 경로창 정하기 위한 flag 변수
@@ -264,6 +280,6 @@ def down():
 
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0:5000')
+	app.run(host='0.0.0.0', debug=True)
 	
 	
