@@ -17,8 +17,8 @@ release:
   image: worker
 run:
   web: bundle exec puma -C config/puma.rb
-  worker: python myworker.py
+  worker: python flask_app.py
   asset-syncer:
     command:
-      - python asset-syncer.py
+      - python flask_app.py
     image: worker
