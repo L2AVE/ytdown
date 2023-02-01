@@ -16,7 +16,7 @@ from flask import redirect, send_file
 # from tqdm import tqdm
 # from requests import ConnectionError
 # from requests import HTTPError
-import settings.py
+
 import moviepy.editor as mp
 # import subprocess
 # import logging
